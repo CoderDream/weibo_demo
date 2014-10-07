@@ -5,11 +5,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.coderdream.weibo.R;
+import com.coderdream.weibo.util.AuthUtil;
 
 /**
  * 
@@ -20,7 +23,9 @@ public class WebViewActivity extends Activity {
 
 	private ProgressDialog progressDialog;
 	private static final int CLOSE_DLG = 1;
-	private String url = "http://www.sina.com";
+
+	// private String url = "http://www.sina.com";
+	private String url = null;
 
 	/**
 	 * 进度条的Handler
@@ -29,13 +34,31 @@ public class WebViewActivity extends Activity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		this.setContentView(R.layout.webview);
 
+		// 获得 url
+		// Android 4.0 之后不能在主线程中请求HTTP请求
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				url = AuthUtil.getAuthorizationURL();
+				Log.e("TAG", url);
+				if (null == url) {
+					Toast.makeText(WebViewActivity.this,
+							R.string.auth_url_empty, Toast.LENGTH_LONG).show();
+
+					return;
+				}
+				
+
+				load(url, webView);
+			}
+		}).start();
+
 		init();
-		
-		load(url, webView);
-		
+
+		//Log.e("TAG", url);
+
 		handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
 				// 如果传入的值为1，则关闭进度条
@@ -45,7 +68,6 @@ public class WebViewActivity extends Activity {
 			};
 		};
 
-		
 		//
 		// Task task = new Task(Task.GET_AUTH_URL, null);
 		//
