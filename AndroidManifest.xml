@@ -8,6 +8,8 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,14 +17,23 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.coderdream.weibo.ui.LogoActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/theme_fullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.coderdream.weibo.ui.LoginActivity" />
+        <activity
+            android:name="com.coderdream.weibo.ui.LoginActivity"
+            android:theme="@style/theme_fullScreen" />
+        <activity
+            android:name="com.coderdream.weibo.ui.AuthActivity"
+            android:theme="@style/theme_fullScreen" />
+        <activity
+            android:name="com.coderdream.weibo.ui.WebViewActivity"
+            android:theme="@style/theme_fullScreen" />
 
         <service android:name="com.coderdream.weibo.logic.MainService" />
     </application>

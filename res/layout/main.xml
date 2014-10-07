@@ -8,12 +8,12 @@
         android:id="@+id/txt_result"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_status" />
+        android:text="Test ADD Method" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login" />
+        android:text="get" />
 
 </LinearLayout>
