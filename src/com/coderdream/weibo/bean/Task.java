@@ -12,6 +12,10 @@ public class Task {
 
 	// 登录
 	public static final int WEIBO_LOGIN = 1;
+	// 获取授权信息
+	public static final int GET_ACCESS_TOKEN = 2;
+	// 获取授权地址
+	public static final int GET_AUTH_URL = 3;
 
 	public Task(int taskId, Map<String, Object> taskParams) {
 		this.taskId = taskId;
